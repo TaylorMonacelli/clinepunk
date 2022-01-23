@@ -40,6 +40,7 @@ setup(
     },
     install_requires=[
         "appdirs",
+        "click",
         "humanfriendly",
         "requests",
         "diskcache",
