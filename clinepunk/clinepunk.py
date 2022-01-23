@@ -11,10 +11,10 @@ import diskcache
 import humanfriendly
 import requests
 
+from clinepunk import cache
+
 cache_path = pathlib.Path(appdirs.user_cache_dir(appname="clinepunk"))
-url = (
-    "https://raw.githubusercontent.com/adambom/dictionary/master/dictionary.json"
-)
+url = "https://raw.githubusercontent.com/adambom/dictionary/master/dictionary.json"
 
 
 def refresh_cache():
@@ -28,22 +28,7 @@ def refresh_cache():
 
 
 def get_words(count=1):
-    js = ""
-    with diskcache.Cache(cache_path) as reference:
-        result = reference.get("clinepunk.words")
-        if not result:
-            logging.debug("setting cache")
-            js = refresh_cache()
-            reference.set(
-                "clinepunk.words",
-                io.BytesIO(js),
-                expire=datetime.timedelta(days=365 * 2).total_seconds(),
-            )
-        else:
-            logging.debug("cache is still fresh, using it")
-            reader = result
-            js = reader.read().decode()
-
+    js = cache.js1(cache_path, refresh_cache)
     words = json.loads(js)
     words = words.keys()
     words = list(filter(lambda x: len(x) <= 7, words))
