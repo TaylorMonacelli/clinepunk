@@ -44,7 +44,6 @@ setup(
         "humanfriendly",
         "requests",
         "diskcache",
-        "build",
         "importlib; python_version == '3.7'",
     ],
     license="MIT license",

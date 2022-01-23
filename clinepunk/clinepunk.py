@@ -13,7 +13,7 @@ import requests
 
 cache_path = pathlib.Path(appdirs.user_cache_dir(appname="clinepunk"))
 url = (
-    "https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json"
+    "https://raw.githubusercontent.com/adambom/dictionary/master/dictionary.json"
 )
 
 
@@ -46,7 +46,7 @@ def get_words(count=1):
 
     words = json.loads(js)
     words = words.keys()
-    words = list(filter(lambda x: len(x) <= 5, words))
+    words = list(filter(lambda x: len(x) <= 7, words))
 
     logging.debug(f"cache path is {cache_path}")
     logging.debug(f"cache has {len(words):,d} words")
@@ -72,7 +72,7 @@ def main():
 
     words = get_words(count=2)
     out = "".join(words)
-    print(out)
+    print(out.lower())
 
 
 if __name__ == "__main__":
