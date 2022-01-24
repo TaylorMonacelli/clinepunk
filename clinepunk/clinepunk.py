@@ -1,5 +1,3 @@
-import datetime
-import io
 import json
 import logging
 import pathlib
@@ -7,11 +5,10 @@ import random
 import sys
 
 import appdirs
-import diskcache
 import humanfriendly
 import requests
 
-from clinepunk import cache
+from clinepunk import cache as cachemod
 
 cache_path = pathlib.Path(appdirs.user_cache_dir(appname="clinepunk"))
 url = "https://raw.githubusercontent.com/adambom/dictionary/master/dictionary.json"
@@ -28,7 +25,7 @@ def refresh_cache():
 
 
 def get_words(count=1):
-    js = cache.js1(cache_path, refresh_cache)
+    js = cachemod.cache(cache_path, refresh_cache, "clinepunk.words")
     words = json.loads(js)
     words = words.keys()
     words = list(filter(lambda x: len(x) <= 7, words))

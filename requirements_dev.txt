@@ -2,6 +2,7 @@ appdirs==1.4.4
 black==21.12b0
 bump2version==0.5.11
 coverage==4.5.4
+omegaconf
 diskcache==5.4.0
 flake8==3.7.8
 humanfriendly==10.0
