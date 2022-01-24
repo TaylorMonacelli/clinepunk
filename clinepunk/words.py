@@ -40,7 +40,7 @@ def find_filter(words, min_length=3, max_length=7):
     return filter(lambda s: s.length > min_length and s.length <= max_length, words)
 
 
-def doit():
+def get_words(count=2):
     cache_path = pathlib.Path(appdirs.user_cache_dir(appname="clinepunk"))
     buffer = cachemod.cache(cache_path, refresh_cache, "clinepunk.words2")
     print(type(buffer))
@@ -50,7 +50,6 @@ def doit():
     words = list(find_filter(col.words))
     logging.debug(f"{len(words)} match query")
 
-    count = 2
     sample = random.sample(words, count)
 
     return [x.word for x in sample]
@@ -65,9 +64,10 @@ def main():
             logging.StreamHandler(sys.stdout),
         ],
     )
-    lst = doit()
+    lst = get_words(count=2)
     out = "".join(lst)
-    print(out)
+    logging.debug(out)
+    return out
 
 
 if __name__ == "__main__":

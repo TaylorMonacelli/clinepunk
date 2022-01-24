@@ -24,7 +24,7 @@ def refresh_cache():
     return ""
 
 
-def get_words(count=1):
+def get_words(count=2):
     js = cachemod.cache(cache_path, refresh_cache, "clinepunk.words")
     words = json.loads(js)
     words = words.keys()
@@ -39,7 +39,7 @@ def get_words(count=1):
     sample = random.sample(words, count)
     logging.debug(f"sample words is {sample}")
 
-    return sample
+    return [x.lower() for x in sample]
 
 
 def main():
@@ -51,10 +51,10 @@ def main():
             logging.StreamHandler(sys.stdout),
         ],
     )
-
-    words = get_words(count=2)
-    out = "".join(words)
-    print(out.lower())
+    lst = get_words(count=2)
+    out = "".join(lst)
+    logging.debug(out)
+    return out
 
 
 if __name__ == "__main__":
