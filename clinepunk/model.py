@@ -11,4 +11,3 @@ class Word:
 @dataclass
 class WordCollection:
     words: List[Word] = field(default_factory=list)
-    
