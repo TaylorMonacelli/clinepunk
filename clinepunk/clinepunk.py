@@ -36,7 +36,12 @@ def get_words(count=2):
         f"cache has size {humanfriendly.format_size(cache_path.stat().st_size, binary=True)}"
     )
 
+    remove = ["-", "sex"]
     sample = random.sample(words, count)
+    for word in remove:
+        if word in "".join(sample):
+            sample = random.sample(words, count)
+
     logging.debug(f"sample words is {sample}")
 
     return [x.lower() for x in sample]
