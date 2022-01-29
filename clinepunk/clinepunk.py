@@ -28,7 +28,7 @@ def get_words(count=2):
     js = cachemod.cache(cache_path, refresh_cache, "clinepunk.words")
     words = json.loads(js)
     words = words.keys()
-    words = list(filter(lambda x: len(x) <= 7, words))
+    words = list(filter(lambda x: len(x) >=3 and len(x) <= 7, words))
 
     logging.debug(f"cache path is {cache_path}")
     logging.debug(f"cache has {len(words):,d} words")
