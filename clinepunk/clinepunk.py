@@ -25,6 +25,10 @@ def refresh_cache():
     return ""
 
 
+def sample(count=2):
+    return words2.get_words(count=2)
+
+
 def get_words(count=2):
     js = cachemod.cache(cache_path, refresh_cache, "clinepunk.words")
     words = json.loads(js)
