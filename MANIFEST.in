@@ -1,3 +1,6 @@
+include clinepunk/wordlists/words3.txt
+include clinepunk/wordlists/words.txt
+
 include AUTHORS.rst
 include CONTRIBUTING.rst
 include HISTORY.rst

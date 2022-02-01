@@ -9,6 +9,7 @@ import humanfriendly
 import requests
 
 from clinepunk import cache as cachemod
+from clinepunk import words2
 
 cache_path = pathlib.Path(appdirs.user_cache_dir(appname="clinepunk"))
 url = "https://raw.githubusercontent.com/adambom/dictionary/master/dictionary.json"
@@ -28,13 +29,12 @@ def get_words(count=2):
     js = cachemod.cache(cache_path, refresh_cache, "clinepunk.words")
     words = json.loads(js)
     words = words.keys()
-    words = list(filter(lambda x: len(x) >=3 and len(x) <= 7, words))
+    words = list(filter(lambda x: len(x) >= 3 and len(x) <= 7, words))
 
+    size = humanfriendly.format_size(cache_path.stat().st_size, binary=True)
     logging.debug(f"cache path is {cache_path}")
     logging.debug(f"cache has {len(words):,d} words")
-    logging.debug(
-        f"cache has size {humanfriendly.format_size(cache_path.stat().st_size, binary=True)}"
-    )
+    logging.debug(f"cache has size {size}")
 
     remove = ["-", "sex", " "]
     sample = random.sample(words, count)
@@ -57,6 +57,7 @@ def main():
         ],
     )
     lst = get_words(count=2)
+    lst = words2.get_words(count=2)
     out = "".join(lst)
     logging.debug(out)
     return out
