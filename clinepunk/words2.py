@@ -2,9 +2,11 @@ import logging
 import pathlib
 import random
 import sys
-from ast import parse
+import typing
 
 import pkg_resources
+
+__WORD_LIST__: typing.List[str] = []
 
 
 def parse_flist(path):
@@ -22,14 +24,18 @@ def parse_flist(path):
     return words
 
 
-def get_words(count=2):
+def _generate_word_list():
+    logging.debug("_generate_word_list")
     words = parse_flist("clinepunk/wordlists/words.txt")
-    words = list(filter(lambda x: len(x) >= 2, words))
-    remove = ["-", "sex", " "]
-    sample = random.sample(words, count)
-    for word in remove:
-        if word in "".join(sample):
-            sample = random.sample(words, count)
+    return list(filter(lambda x: len(x) >= 2, words))
+
+
+def get_words(count=2):
+    global __WORD_LIST__
+    if not __WORD_LIST__:
+        __WORD_LIST__ = _generate_word_list()
+
+    sample = random.sample(__WORD_LIST__, count)
 
     logging.debug(f"sample words is {sample}")
 
@@ -45,6 +51,10 @@ def main():
             logging.StreamHandler(sys.stdout),
         ],
     )
+
+    lst = get_words(count=2)
+    out = "".join(lst)
+    logging.debug(out)
 
     lst = get_words(count=2)
     out = "".join(lst)

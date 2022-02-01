@@ -3,13 +3,14 @@ import sys
 
 import click
 
-from clinepunk import clinepunk
+from clinepunk import words2
 
 
 @click.command()
 def main(args=None):
     """Console script for clinepunk."""
-    words = clinepunk.get_words(count=2)
+    # words = clinepunk.get_words(count=2)
+    words = words2.get_words(count=2)
     out = "".join(words)
     print(out)
 

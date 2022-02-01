@@ -56,7 +56,7 @@ def main():
             logging.StreamHandler(sys.stdout),
         ],
     )
-    lst = get_words(count=2)
+    # lst = get_words(count=2)
     lst = words2.get_words(count=2)
     out = "".join(lst)
     logging.debug(out)
