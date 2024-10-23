@@ -16,7 +16,7 @@ diskcache==5.6.3
     # via clinepunk (setup.py)
 humanfriendly==10.0
     # via clinepunk (setup.py)
-idna==3.3
+idna==3.10
     # via requests
 requests==2.27.1
     # via clinepunk (setup.py)
