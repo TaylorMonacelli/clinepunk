@@ -8,7 +8,7 @@ appdirs==1.4.4
     # via clinepunk (setup.py)
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.1.1
+charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via clinepunk (setup.py)
