@@ -20,5 +20,5 @@ idna==3.10
     # via requests
 requests==2.32.3
     # via clinepunk (setup.py)
-urllib3==2.2.3
+urllib3==2.3.0
     # via requests
